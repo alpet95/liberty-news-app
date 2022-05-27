@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 // ========== components ==========
 import Post from "./components/Post";
 import Pagination from "./components/Pagination";
-// ========== data ==========
-// import posts from "./data/posts";
 // ========== styles ==========
 import classes from "./App.module.css";
 
@@ -20,8 +18,6 @@ const App = () => {
       );
       const data = await response.json();
       const loadedNews = [];
-
-      console.log(data.results);
 
       for (const key in data.results) {
         loadedNews.push({
