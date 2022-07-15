@@ -1,0 +1,57 @@
+.header {
+  flex: 0 1 auto;
+  padding: 15px 5px;
+  text-align: center;
+  color: var(--light);
+  background-color: var(--primary);
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  position: relative;
+  width: 85px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo_title {
+  font: italic small-caps 600 24px Cambria, serif;
+  color: var(--light);
+  cursor: pointer;
+}
+
+.logo_icon {
+  position: absolute;
+  top: 25px;
+  left: 72px;
+  color: var(--secondary);
+}
+
+.navbar_list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+}
+
+.navbar_list li {
+  margin-right: 5px;
+  color: var(--light);
+  font-size: 20px;
+  transition: color 0.2s linear;
+  cursor: pointer;
+}
+
+.navbar_list li:last-of-type {
+  margin-right: 0;
+}
+
+.navbar_list li:hover {
+  color: var(--secondary);
+}

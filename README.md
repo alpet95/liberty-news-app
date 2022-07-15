@@ -1,6 +1,6 @@
-## React News Project
+## Liberty News App
 
-You can check the most popular articles published by The New York Times in this simple news app.
+Check the most read news articles published by The New York Times.
 
 ## Featured Stack
 

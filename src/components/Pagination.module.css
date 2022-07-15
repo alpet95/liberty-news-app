@@ -1,0 +1,31 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
+
+.number {
+  margin-right: 8px;
+  width: 37px;
+  height: 37px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--primary);
+  border-radius: 50%;
+  font-style: italic;
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
+
+.number:hover:not(.active) {
+  border: 1px solid transparent;
+  color: #fff;
+  background-color: var(--secondary);
+}
+
+.active {
+  color: #fff;
+  background-color: #52be80;
+}

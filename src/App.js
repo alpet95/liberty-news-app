@@ -1,74 +1,123 @@
-import React, { useState, useEffect } from "react";
-// ========== components ==========
-import Post from "./components/Post";
+import React, { Fragment, useState, useEffect, useCallback } from "react";
+
+import Header from "./components/layout/Header";
+import News from "./components/News";
 import Pagination from "./components/Pagination";
-// ========== styles ==========
+import Footer from "./components/layout/Footer";
+import Container from "./components/interface/Container";
+import Loading from "./components/interface/Loading";
+import Error from "./components/interface/Error";
+import NotFound from "./components/interface/NotFound";
+
 import classes from "./App.module.css";
+import { AiOutlineRead } from "react-icons/ai";
 
 const App = () => {
   // ========== state ==========
   const [news, setNews] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // ========== fetch api ==========
-  const fetchDataHandler = async () => {
+  // ========== fetch request ==========
+  const fetchNewsHandler = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+
     try {
-      const response = await fetch(
-        "https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=fy05XmmeVqql1CdM5uqJ6aeWVXFzfATV"
-      );
+      const url =
+        "https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=fy05XmmeVqql1CdM5uqJ6aeWVXFzfATV";
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error("Network response error!");
+      }
+
       const data = await response.json();
-      const loadedNews = [];
+      const fetchedNews = [];
 
       for (const key in data.results) {
-        loadedNews.push({
-          id: key,
+        fetchedNews.push({
+          id: data.results[key].id !== null ? data.results[key].id : key,
           title:
             data.results[key].title !== ""
               ? data.results[key].title
-              : "Unknown Title",
-          article:
+              : "Recent News",
+          abstract:
             data.results[key].abstract !== ""
               ? data.results[key].abstract
-              : "Unknown Abstract",
+              : "No Abstract",
           image:
             data.results[key].media.length !== 0
               ? data.results[key].media[0]["media-metadata"][2].url
-              : null,
+              : "https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         });
       }
-      setNews(loadedNews);
+      setNews(fetchedNews);
+      setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error.message);
+      setError(true);
     }
-  };
-
-  useEffect(() => {
-    fetchDataHandler();
   }, []);
 
+  useEffect(() => {
+    fetchNewsHandler();
+  }, [fetchNewsHandler]);
+
   // ========== variables ==========
-  const postsPerPage = 3;
-  const totalPosts = news.length;
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = news.slice(indexOfFirstPost, indexOfLastPost);
+  const newsPerPage = 4;
+  const totalNews = news.length;
+  const indexOfLastNews = currentPage * newsPerPage;
+  const indexOfFirstPost = indexOfLastNews - newsPerPage;
+  const currentNews = news.slice(indexOfFirstPost, indexOfLastNews);
 
   // ========== handlers ==========
-  const changePageHandler = (pageNumber) => {
+  const switchPageHandler = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
+  // ========== conditional content ==========
+  let content = <NotFound />;
+
+  if (loading) {
+    content = <Loading />;
+  }
+
+  if (news.length > 0) {
+    content = (
+      <Fragment>
+        <Pagination
+          newsPerPage={newsPerPage}
+          totalNews={totalNews}
+          currentPage={currentPage}
+          getPageNumber={switchPageHandler}
+        />
+        <News news={currentNews} />
+      </Fragment>
+    );
+  }
+
+  if (error) {
+    content = <Error />;
+  }
+
   return (
-    <div className={classes.app}>
-      <h1 className={classes.heading}>News App</h1>
-      <p className={classes.subheading}>Stay up to date</p>
-      <Post posts={currentPosts} />
-      <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={totalPosts}
-        currentPage={currentPage}
-        onClickPageNumber={changePageHandler}
-      />
+    <div
+      className={`${classes.app} ${
+        !news.length ? classes.app_full_height : ""
+      }`}
+    >
+      <Header />
+      <main className={classes.main}>
+        <Container>
+          <h1 className={classes.heading}>
+            Most Read <AiOutlineRead className={classes.heading_icon} />
+          </h1>
+          {content}
+        </Container>
+      </main>
+      <Footer />
     </div>
   );
 };

@@ -1,15 +1,11 @@
 import React from "react";
-// ========== styles ==========
-import classes from "../App.module.css";
+import classes from "./Pagination.module.css";
 
 const Pagination = (props) => {
-  // ========== variables ==========
-  const { postsPerPage, totalPosts, currentPage, onClickPageNumber } = props;
-
-  // ========== populate page numbers ==========
+  const { newsPerPage, totalNews, currentPage, getPageNumber } = props;
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
-    pageNumbers.push(i);
+  for (let page = 1; page <= Math.ceil(totalNews / newsPerPage); page++) {
+    pageNumbers.push(page);
   }
 
   return (
@@ -18,8 +14,11 @@ const Pagination = (props) => {
         {pageNumbers.map((number) => (
           <li
             key={number}
-            className={number === currentPage ? classes.active : ""}
-            onClick={() => onClickPageNumber(number)}
+            id={number}
+            className={`${classes.number} ${
+              number === currentPage ? classes.active : ""
+            }`}
+            onClick={() => getPageNumber(number)}
           >
             <span>{number}</span>
           </li>
