@@ -8,4 +8,4 @@ React (inc. Hooks, Fetch API), CSS3, HTML5, Responsive Web Design.
 
 ## URL
 
-https://alpet95-react-news-project.netlify.app
+https://liberty-news.netlify.app
