@@ -4,13 +4,13 @@
   align-items: center;
 }
 
-.error_icon {
+.error-icon {
   margin-bottom: 5px;
   font-size: 25px;
-  color: #b03a2e;
+  color: var(--error);
 }
 
-.error_message {
+.error-message {
   margin-bottom: 10px;
   text-align: center;
   line-height: 1.4;

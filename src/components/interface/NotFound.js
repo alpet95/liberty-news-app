@@ -5,8 +5,8 @@ import { FaRegSurprise } from "react-icons/fa";
 const NotFound = () => {
   return (
     <div className={classes.notfound}>
-      <FaRegSurprise className={classes.notfound_icon} />
-      <p className={classes.notfound_message}>
+      <FaRegSurprise className={classes["notfound-icon"]} />
+      <p className={classes["notfound-message"]}>
         No news available for now.
         <br />
         Please try again later.

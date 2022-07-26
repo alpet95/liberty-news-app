@@ -20,27 +20,27 @@
   align-items: center;
 }
 
-.logo_title {
+.logo-title {
   font: italic small-caps 600 24px Cambria, serif;
   color: var(--light);
   cursor: pointer;
 }
 
-.logo_icon {
+.logo-icon {
   position: absolute;
   top: 25px;
   left: 72px;
   color: var(--secondary);
 }
 
-.navbar_list {
+.navbar-list {
   display: flex;
   justify-content: space-between;
   align-items: center;
   list-style-type: none;
 }
 
-.navbar_list li {
+.navbar-list li {
   margin-right: 5px;
   color: var(--light);
   font-size: 20px;
@@ -48,10 +48,10 @@
   cursor: pointer;
 }
 
-.navbar_list li:last-of-type {
+.navbar-list li:last-of-type {
   margin-right: 0;
 }
 
-.navbar_list li:hover {
+.navbar-list li:hover {
   color: var(--secondary);
 }

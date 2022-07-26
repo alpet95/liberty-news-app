@@ -4,23 +4,3 @@
   display: flex;
   flex-direction: column;
 }
-
-.app_full_height {
-  height: 100vh;
-}
-
-.main {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-}
-
-.heading {
-  margin: 20px 0;
-  text-align: center;
-  font-size: 20px;
-}
-
-.heading_icon {
-  vertical-align: middle;
-}
