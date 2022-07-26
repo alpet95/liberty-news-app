@@ -4,7 +4,7 @@ Check the most read news articles published by The New York Times.
 
 ## Featured Stack
 
-React (inc. Hooks, Fetch API), CSS3, HTML5, Responsive Web Design.
+React (inc. Hooks, Custom Hook, Fetch API), CSS3, HTML5, Responsive Web Design.
 
 ## URL
 
